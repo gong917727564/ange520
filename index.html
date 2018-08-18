@@ -109,22 +109,23 @@
 
 <script>
 
-    (function () {
+    (function(){
 
         var canvas = $('#canvas');
 
+		
 
         if (!canvas[0].getContext) {
 
             $("#error").show();
 
-            return false;
-        }
+            return false;        }
+
 
 
         var width = canvas.width();
 
-        var height = canvas.height();
+        var height = canvas.height();        
 
         canvas.attr("width", width);
 
@@ -174,7 +175,7 @@
 
                     ]]
 
-                ]]
+                ]] 
 
             ],
 
@@ -201,6 +202,7 @@
         }
 
 
+
         var tree = new Tree(canvas[0], width, height, opts);
 
         var seed = tree.seed;
@@ -210,7 +212,8 @@
         var hold = 1;
 
 
-        canvas.click(function (e) {
+
+        canvas.click(function(e) {
 
             var offset = canvas.offset(), x, y;
 
@@ -220,7 +223,7 @@
 
             if (seed.hover(x, y)) {
 
-                hold = 0;
+                hold = 0; 
 
                 canvas.unbind("click");
 
@@ -230,7 +233,7 @@
 
             }
 
-        }).mousemove(function (e) {
+        }).mousemove(function(e){
 
             var offset = canvas.offset(), x, y;
 
@@ -241,6 +244,7 @@
             canvas.toggleClass('hand', seed.hover(x, y));
 
         });
+
 
 
         var seedAnimate = eval(Jscex.compile("async", function () {
@@ -274,11 +278,12 @@
         }));
 
 
+
         var growAnimate = eval(Jscex.compile("async", function () {
 
             do {
 
-                tree.grow();
+    	        tree.grow();
 
                 $await(Jscex.Async.sleep(10));
 
@@ -287,17 +292,19 @@
         }));
 
 
+
         var flowAnimate = eval(Jscex.compile("async", function () {
 
             do {
 
-                tree.flower(2);
+    	        tree.flower(2);
 
                 $await(Jscex.Async.sleep(10));
 
             } while (tree.canFlower());
 
         }));
+
 
 
         var moveAnimate = eval(Jscex.compile("async", function () {
@@ -316,6 +323,8 @@
 
             tree.snapshot("p2", 500, 0, 610, 680);
 
+
+
             // 会有闪烁不得意这样做, (＞﹏＜)
 
             canvas.parent().css("background", "url(" + tree.toDataURL('image/png') + ")");
@@ -327,6 +336,7 @@
             canvas.css("background", "none");
 
         }));
+
 
 
         var jumpAnimate = eval(Jscex.compile("async", function () {
@@ -348,22 +358,24 @@
         }));
 
 
+
         var textAnimate = eval(Jscex.compile("async", function () {
 
-            var together = new Date();
+		    var together = new Date();
 
-            together.setFullYear(2018, 5, 20); 			//时间年月日
+		    together.setFullYear(2010,1 , 15); 			//时间年月日
 
-            together.setHours(16);						//小时
+		    together.setHours(16);						//小时	
 
-            together.setMinutes(53);					//分钟
+		    together.setMinutes(53);					//分钟
 
-            together.setSeconds(0);					//秒前一位
+		    together.setSeconds(0);					//秒前一位
 
-            together.setMilliseconds(2);				//秒第二位
+		    together.setMilliseconds(2);				//秒第二位
 
 
-            $("#code").show().typewriter();
+
+		    $("#code").show().typewriter();
 
             $("#clock-box").fadeIn(500);
 
@@ -378,6 +390,7 @@
         }));
 
 
+
         var runAsync = eval(Jscex.compile("async", function () {
 
             $await(seedAnimate());
@@ -389,7 +402,9 @@
             $await(moveAnimate());
 
 
+
             textAnimate().start();
+
 
 
             $await(jumpAnimate());
@@ -397,11 +412,12 @@
         }));
 
 
+
         runAsync().start();
 
     })();
 
-</script>
+    </script>
 
 
 </body>
